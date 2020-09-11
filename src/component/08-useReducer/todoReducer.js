@@ -1,11 +1,16 @@
 
 export const todoReducer = (state = [], action) => {
-    switch ( action?.type ) {
-        // case 'add':
-            
-        //     break;
-    
-        default:
-            return state
+    switch (action.type) {
+        case 'add':
+            return [...state, action.payload];
+
+        case 'delete':
+            return state.filter(todo => todo.id !== action.payload);
+
+        case 'complete':
+            return state.map(todo => (todo.id === action.payload) ? {...todo, done: !todo.done} : todo );
+
+        default: 
+            return state;
     }
 } 
